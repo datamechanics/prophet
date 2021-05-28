@@ -29,7 +29,7 @@ MODEL_TARGET_DIR = os.path.join('prophet', 'stan_model')
 
 def get_backends_from_env() -> List[str]:
     from prophet.models import StanBackendEnum
-    return os.environ.get("STAN_BACKEND", StanBackendEnum.PYSTAN.name).split(",")
+    return os.environ.get("STAN_BACKEND", StanBackendEnum.CMDSTANPY.name).split(",")
 
 
 def build_models(target_dir):
