@@ -11,8 +11,6 @@ from calendar import Calendar, MONDAY
 from datetime import date, timedelta
 
 from convertdate.islamic import from_gregorian, to_gregorian
-from lunarcalendar import Lunar, Converter
-from lunarcalendar.converter import DateNotExist
 
 from holidays import WEEKEND, HolidayBase, Turkey
 from dateutil.easter import easter, EASTER_ORTHODOX
@@ -89,13 +87,6 @@ class Indonesia(HolidayBase):
         else:
             self[date(year, 1, 1)] = "New Year's Day"
 
-        # Chinese New Year/ Spring Festival
-        name = "Chinese New Year"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 1)).to_date()
-            if ds.year == year:
-                self[ds] = name
-
         # Day of Silence / Nyepi
         # Note:
         # This holiday is determined by Balinese calendar, which is not currently
@@ -146,13 +137,6 @@ class Indonesia(HolidayBase):
         name = "Ascension of Jesus"
         for offset in range(-1, 2, 1):
             ds = easter(year + offset) + rd(days=+39)
-            if ds.year == year:
-                self[ds] = name
-
-        # Buddha's Birthday
-        name = "Buddha's Birthday"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 4, 15)).to_date()
             if ds.year == year:
                 self[ds] = name
 
@@ -484,13 +468,6 @@ class Malaysia(HolidayBase):
             if y == year:
                 self[date(y, m, d)] = name
 
-        # Chinese New Year
-        name = "Chinese New Year"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 1)).to_date()
-            if ds.year == year:
-                self[ds] = name
-
         # Tamil New Year
         # Note: it's not necessarily 04/14
         # due to the local calendar
@@ -508,13 +485,6 @@ class Malaysia(HolidayBase):
         # Labor Day
         name = "Labor Day"
         self[date(year, 5, 1)] = name
-
-        # Buddha's Birthday
-        name = "Wesak Day"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 4, 15)).to_date()
-            if ds.year == year:
-                self[ds] = name
 
         # King's birthday
         # https://www.thestar.com.my/news/nation/2017/04/26/
@@ -600,38 +570,6 @@ class Vietnam(HolidayBase):
         name = "New Year's Day"
         self[date(year, 1, 1)] = name
 
-        # Vietnamese New Year
-        name = "Vietnamese New Year"
-        for offset in range(-1, 2, 1):
-            try:
-                ds = Converter.Lunar2Solar(Lunar(year - 1 + offset, 12, 30)).to_date()
-            except DateNotExist:
-                ds = Converter.Lunar2Solar(Lunar(year - 1 + offset, 12, 29)).to_date()
-            if ds.year == year:
-                self[ds] = name
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 1)).to_date()
-            if ds.year == year:
-                self[ds] = name
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 2)).to_date()
-            if ds.year == year:
-                self[ds] = name
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 3)).to_date()
-            if ds.year == year:
-                self[ds] = name
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 4)).to_date()
-            if ds.year == year:
-                self[ds] = name
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 5)).to_date()
-            if ds.year == year:
-                self[ds] = name
-
-        # Hung Kings Commemorations
-        name = "Hung Kings Commemorations"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 3, 10)).to_date()
-            if ds.year == year:
-                self[ds] = name
-
         # Reunification Day
         name = "Reunification Day"
         self[date(year, 4, 30)] = name
@@ -701,13 +639,6 @@ class Thailand(HolidayBase):
 
         # Royal Ploughing Ceremony
         # arbitrary day in May
-
-        # Buddha's Birthday
-        name = "Buddha's Birthday"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 4, 15)).to_date()
-            if ds.year == year:
-                self[ds] = name
 
         # Coronation Day, removed in 2017
         name = "Coronation Day"
@@ -1207,13 +1138,6 @@ class China(HolidayBase):
         name = "New Year's Day"
         self[date(year, 1, 1)] = name
 
-        # Chinese New Year/ Spring Festival
-        name = "Chinese New Year"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 1, 1)).to_date()
-            if ds.year == year:
-                self[ds] = name
-
         # Tomb-Sweeping Day
         name = "Tomb-Sweeping Day"
         self[date(year, 4, 4)] = name
@@ -1222,20 +1146,6 @@ class China(HolidayBase):
         # Labor Day
         name = "Labor Day"
         self[date(year, 5, 1)] = name
-
-        # Dragon Boat Festival
-        name = "Dragon Boat Festival"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 5, 5)).to_date()
-            if ds.year == year:
-                self[ds] = name
-
-        # Mid-Autumn Festival
-        name = "Mid-Autumn Festival"
-        for offset in range(-1, 2, 1):
-            ds = Converter.Lunar2Solar(Lunar(year + offset, 8, 15)).to_date()
-            if ds.year == year:
-                self[ds] = name
 
         # National Day
         name = "National Day"
