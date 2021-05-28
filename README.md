@@ -1,5 +1,7 @@
 # Prophet: Automatic Forecasting Procedure
 
+> This is a fork of Prophet without its two GPL dependencies: `LunarCalendar` and `pystan`.
+
 ![Build](https://github.com/facebook/prophet/workflows/Build/badge.svg)
 [![Pypi_Version](https://img.shields.io/pypi/v/prophet.svg)](https://pypi.python.org/pypi/prophet)
 [![Conda_Version](https://anaconda.org/conda-forge/prophet/badges/version.svg)](https://anaconda.org/conda-forge/prophet/)
